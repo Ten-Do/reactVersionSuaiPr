@@ -1,4 +1,8 @@
-export const Login = () => (
+import { Link } from "react-router-dom";
+
+export const Login = ({setType}) => {
+
+    return (
     <>
         <header>
         <div id="guap-panel">
@@ -16,8 +20,9 @@ export const Login = () => (
 				<input className="normal-input" type="password" required size="40" placeholder="Введите пароль..." />
 
                 <button type="submit" className="reg-complete">Авторизоваться</button>
+                <Link to='/register' onClick={setType}>Еще не зарегестрирован? Зарегистрируйся!</Link>
 			</form>
 		</div>
 	</div>
     </>
-)
+)}
