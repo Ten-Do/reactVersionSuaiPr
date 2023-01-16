@@ -20,7 +20,7 @@ export const Registration = ({ setType }) => (
     <>
         <header>
             <div id="guap-panel">
-                <img id="guap-logo" src="../../../assets/guap.svg" />
+                <img id="guap-logo" src="../../../assets/guap.svg" alt="Г У А П" />
             </div>
         </header>
         <div id="fixed-container">
@@ -88,7 +88,7 @@ export const Registration = ({ setType }) => (
                         <label className="form-label-file" htmlFor="file-input" id="reg-file-input">
                             <span>Студенческий билет</span>
                             <div id="stud-logo-container">
-                                <img id="stud-bilet-logo" src="../../../assets/stud-bilet.svg" />
+                                <img id="stud-bilet-logo" src="../../../assets/stud-bilet.svg" alt="stud-bilet.svg" />
                             </div>
                         </label>
                     </div>

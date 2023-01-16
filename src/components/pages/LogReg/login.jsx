@@ -6,7 +6,7 @@ export const Login = ({setType}) => {
     <>
         <header>
         <div id="guap-panel">
-            <img id="guap-logo" src="../../../assets/guap.svg" />
+            <img id="guap-logo" src="../../../assets/guap.svg" alt="Г У А П" />
         </div>
 
     </header>
