@@ -20,7 +20,7 @@ function isValidInput(elem) {
     return reg.test(elem.value);
 }
 
-export const Registration = ({ setType }) => {
+export const Registration = () => {
     const [inputs, setInputs] = useState({
         email: {
             value: '',
@@ -172,7 +172,7 @@ export const Registration = ({ setType }) => {
                         </div>
                         <button id="button" type="submit" onClick={submitHandler}>Зарегистрироваться</button>
                     </form>
-                    <Link to='/login' onClick={setType}>Уже зарегестрирован? Авторизуйся!</Link>
+                    <Link to='/login'>Уже зарегестрирован? Авторизуйся!</Link>
                 </div>
             </div>
         </>

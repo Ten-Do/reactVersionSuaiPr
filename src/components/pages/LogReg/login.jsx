@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Login = ({setType}) => {
+export const Login = () => {
 
     return (
     <>
@@ -20,7 +20,7 @@ export const Login = ({setType}) => {
 				<input className="normal-input" type="password" required size="40" placeholder="Введите пароль..." />
 
                 <button type="submit" className="reg-complete">Авторизоваться</button>
-                <Link to='/register' onClick={setType}>Еще не зарегестрирован? Зарегистрируйся!</Link>
+                <Link to='/register'>Еще не зарегестрирован? Зарегистрируйся!</Link>
 			</form>
 		</div>
 	</div>
