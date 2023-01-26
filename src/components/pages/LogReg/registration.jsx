@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from 'axios'
 import "./registration.css";
 
 let expanded = false;
@@ -30,17 +30,13 @@ export const Registration = () => {
             value: '',
             isValid: false
         },
-        pass: {
+        surname: {
             value: '',
             isValid: false
         },
-        repeatPass: {
-            value: '',
-            isValid: false
-        }
+        studentCard: null,
     })
 
-    useEffect(() => { console.log("render") })
 
     const mailChangeHandler = ({ target }) => {
         setInputs({
@@ -60,35 +56,46 @@ export const Registration = () => {
         })
     }
 
-    const passwordChangeHandler = ({ target }) => {
+    const surnameChangeHandler = ({ target }) => {
         setInputs({
-            ...inputs, pass: {
+            ...inputs, surname: {
                 value: target.value,
                 isValid: isValidInput(target)
             }
         })
     }
 
-    const repeatPassChangeHandler = ({ target }) => {
+    const fileChangeHandler = ({ target }) => {
+        console.log(target.files[0])
         setInputs({
-            ...inputs, repeatPass: {
-                value: target.value,
-                isValid: inputs.pass.value === target.value
-            }
+            ...inputs, studentCard: target.files[0]
         })
     }
 
 
-
     const submitHandler = async (e) => {
         e.preventDefault()
-        let flag = false;
-        Object.values(inputs).forEach(elem => { if (!elem.isValid) flag = true });
-
-        if (flag) {
+        let flag = inputs.email.isValid && inputs.name.isValid && inputs.surname.isValid;
+        const checkedBoxes = document.querySelectorAll('input[type=checkbox]:checked');
+        const subscriptions = {};
+        checkedBoxes.forEach(elem => subscriptions[elem.id] = true)
+        if (!(flag && inputs.studentCard)) {
             alert("все поля должны быть заполнены коректно!")
         } else {
-            alert("Запрос коректен")
+            const formData = new FormData();
+            formData.append('email', inputs.email.value);
+            formData.append('name', inputs.name.value);
+            formData.append('surname', inputs.surname.value);
+            formData.append('subscriptions', JSON.stringify(subscriptions));
+            formData.append('studentCard', inputs.studentCard);
+            console.log(JSON.stringify(subscriptions))
+            axios.post('http://localhost:5000/api/registration', formData)
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 
@@ -108,14 +115,12 @@ export const Registration = () => {
                     <form action="" method="post" id="forma" name="forma" target="votar">
                         <label className="form-label">Email</label>
                         <input value={inputs.email.value} onChange={mailChangeHandler} style={{ border: inputs.email.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="email" className="normal-input" type="email" name="email" data-reg="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" required size="40" placeholder="Введите Email..." />
-                        <label className="form-label">ФИО</label>
-                        <input value={inputs.name.value} onChange={nameChangeHandler} style={{ border: inputs.name.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="name" className="normal-input" type="text" required size="40" data-reg="^([а-яёА-ЯЁ]{2,}\s[а-яёА-ЯЁ]{1,}'?-?[а-яёА-ЯЁ]{2,}\s?([а-яёА-ЯЁ]{1,})?)" name="name" placeholder="Введите ФИО..." />
-                        <label className="form-label">Пароль</label>
-                        <input value={inputs.pass.value} onChange={passwordChangeHandler} style={{ border: inputs.pass.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="pass" className="normal-input" type="password" name="pass" data-reg="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required size="40" placeholder="Введите пароль..." />
-                        <label className="form-label">Пароль</label>
-                        <input value={inputs.repeatPass.value} onChange={repeatPassChangeHandler} style={{ border: inputs.repeatPass.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="second-pass" className="normal-input" type="password" placeholder="Подтвердите пароль..." />
+                        <label className="form-label">Фамилия</label>
+                        <input value={inputs.surname.value} onChange={surnameChangeHandler} style={{ border: inputs.surname.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="surname" className="normal-input" type="text" required size="40" data-reg="^([а-яёА-ЯЁ\-]{1,20})" name="surname" placeholder="Введите Фамилию..." />
+                        <label className="form-label">Имя</label>
+                        <input value={inputs.name.value} onChange={nameChangeHandler} style={{ border: inputs.name.isValid ? "2px solid rgb(0, 196, 0)" : "2px solid rgb(196, 0, 0)" }} id="name" className="normal-input" type="text" required size="40" data-reg="^([а-яёА-ЯЁ\-]{1,20})" name="name" placeholder="Введите Имя..." />
                         <div id="file-input-container">
-                            <input id="file-input" type="file" name="file" accept="image/*" />
+                            <input onChange={fileChangeHandler} id="file-input" type="file" name="file" accept="image/*" />
                             <label className="form-label-file" htmlFor="file-input" id="reg-file-input">
                                 <span>Студенческий билет</span>
                                 <div id="stud-logo-container">
