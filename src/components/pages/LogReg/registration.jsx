@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
-import "./registration.css";
+import { Header } from "../../header/header";
 
 let expanded = false;
 function showCheckboxes() {
@@ -88,7 +88,6 @@ export const Registration = () => {
             formData.append('surname', inputs.surname.value);
             formData.append('subscriptions', JSON.stringify(subscriptions));
             formData.append('studentCard', inputs.studentCard);
-            console.log(JSON.stringify(subscriptions))
             axios.post('http://localhost:5000/api/registration', formData)
                 .then(res => {
                     console.log(res.data)
@@ -103,11 +102,7 @@ export const Registration = () => {
 
     return (
         <>
-            <header>
-                <div id="guap-panel">
-                    <img id="guap-logo" src="../../../assets/guap.svg" alt="Г У А П" />
-                </div>
-            </header>
+            <Header />
             <div id="fixed-container">
                 <div id="form">
                     <iframe name="votar" style={{ display: "none" }} title="regIframe"></iframe>
