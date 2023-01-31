@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-/* <Link to={PATHS.home}>Home</Link> */
 import { PATHS } from '../../utils/urls'
 import brandSvg from '../../assets/brand.svg'
 import underlineSvg from '../../assets/underline.svg'
