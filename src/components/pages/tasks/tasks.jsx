@@ -10,7 +10,7 @@ export const Tasks = () => {
             <div className="bodytasklist">
                 <div className="container">
                     <div className="btl__content">
-                        <Categories categories={['stegano', 'admin', 'ppc', 'web']}/>
+                        <Categories categories={['stegano', 'admin', 'ppc', 'web']} />
                         <div className="btl__cards">
                             <div className="btl__card">
                                 <div className="btl__card_content">

@@ -18,7 +18,7 @@ export const TaskInfo = () => {
                             </div>
                             <div className="bt__actions">
                                 <input type="text" placeholder="Flag" className="bt__input" />
-                                    <button className="bt__b3">Ответить</button>
+                                <button className="bt__b3">Ответить</button>
                             </div>
                         </div>
                     </div>
