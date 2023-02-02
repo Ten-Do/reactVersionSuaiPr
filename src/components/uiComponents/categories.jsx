@@ -11,12 +11,12 @@ export const Categories = ({ categories }) => {
                     </div>
                     {categories.map(elem => {
                         return (
-                            <>
+                            <div key={elem}>
                                 <div className="btl__slide"></div>
                                 <div className="btl__point">
                                     <a href="">{elem}</a>
                                 </div>
-                            </>
+                            </div>
                         )
                     })}
                 </div>
