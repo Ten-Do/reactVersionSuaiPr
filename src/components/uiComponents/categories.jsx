@@ -7,15 +7,12 @@ export const Categories = ({ categories }) => {
             <div className="btl__settings">
                 <div className="btl__list">
                     <div className="btl__point">
-                        <a href="">All</a>
+                        <a onClick={() => console.log("click")}>All</a>
                     </div>
                     {categories.map(elem => {
                         return (
-                            <div key={elem}>
-                                <div className="btl__slide"></div>
-                                <div className="btl__point">
-                                    <a href="">{elem}</a>
-                                </div>
+                            <div className="btl__point" key={elem}>
+                                <a href="">{elem}</a>
                             </div>
                         )
                     })}

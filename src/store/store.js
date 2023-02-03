@@ -7,7 +7,7 @@ export const useUser = create((set, get) => ({
     name: null,
     surname: null,
     is_activated: false,
-    categories: [],
+    categories: ['any', "stegano", "web", "osint", "network", "ppc", "admin"],
     role: 'user',
 
 
@@ -16,9 +16,9 @@ export const useUser = create((set, get) => ({
 export const useMaterials = create((set, get) => ({
     materials: [],
     getOneMaterial: (id) => get().materials.filter(material => material.id == id)[0],
-    loadMaterials: async () => {
+    loadMaterials: async (categories) => {
         try {
-            const response = await api.get('/materials');
+            const response = await api.get(`/materials?cat=${categories}`);
             set(state => ({ materials: response.data }));
         } catch (error) {
             console.log("error when fetch materials", error)
@@ -29,8 +29,8 @@ export const useMaterials = create((set, get) => ({
 export const useTasks = create((set, get) => ({
     tasks: [],
     getOneTask: (id) => get().tasks.filter(task => task.id == id)[0],
-    loadTasks: async () => {
-        const newTasks = await api.get('tasks');
+    loadTasks: async (categories) => {
+        const newTasks = await api.get(`/tasks?cat=${categories}&page=1`);
         set({ tasks: newTasks.data })
     }
 }))
