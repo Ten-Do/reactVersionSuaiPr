@@ -31,17 +31,17 @@ export const router = createBrowserRouter([
         element: <Materials />,
       },
       {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Registration />
+      },
+      {
         path: "*",
         element: <>NotFoundPage</>,
-      },
+      }
     ],
   },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/register',
-    element: <Registration />
-  }
 ]);

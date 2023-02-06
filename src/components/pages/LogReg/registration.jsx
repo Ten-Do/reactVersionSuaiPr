@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
-import { Header } from "../../header/header";
 
 let expanded = false;
 function showCheckboxes() {
@@ -102,7 +101,6 @@ export const Registration = () => {
 
     return (
         <>
-            <Header />
             <div id="fixed-container">
                 <div id="form">
                     <iframe name="votar" style={{ display: "none" }} title="regIframe"></iframe>
